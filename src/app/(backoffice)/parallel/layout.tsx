@@ -1,4 +1,4 @@
-import React, {Suspense} from 'react'
+import React from 'react'
 {
   /* 
   🐶 Ajoute les 2 props supplémentaires necessaires pour 
@@ -23,8 +23,9 @@ export default async function Layout({
       <div className="m-6 flex flex-col">
         {children}
         {/* 🐶 pense à bonus-1. 🚀 rendu conditionel  */}
-        <Suspense fallback={<p>Loading...</p>}>{role === 'admin' && admin}</Suspense>
+        {editor}
         {/* 🐶 pense à bonus-2. 🚀 Loading  */}
+        {role === 'admin' && admin}
       </div>
     </>
   )
