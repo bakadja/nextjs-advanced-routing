@@ -1,13 +1,21 @@
-import React from 'react'
+import React, {Suspense} from 'react'
 {
   /* 
   🐶 Ajoute les 2 props supplémentaires necessaires pour 
   faire fonctionner nos routes parrallèles  
   */
 }
-const getRole = () => Math.random() > 0.5 ? 'admin' : 'editor'
+const getRole = () => (Math.random() > 0.5 ? 'admin' : 'editor')
 
-export default async function Layout({children, admin , editor}: {children: React.ReactNode, admin: React.ReactNode, editor: React.ReactNode}) {
+export default async function Layout({
+  children,
+  admin,
+  editor,
+}: {
+  children: React.ReactNode
+  admin: React.ReactNode
+  editor: React.ReactNode
+}) {
   const role = getRole()
   return (
     <>
@@ -15,7 +23,7 @@ export default async function Layout({children, admin , editor}: {children: Reac
       <div className="m-6 flex flex-col">
         {children}
         {/* 🐶 pense à bonus-1. 🚀 rendu conditionel  */}
-        {role === 'admin' && admin}
+        <Suspense fallback={<p>Loading...</p>}>{role === 'admin' && admin}</Suspense>
         {/* 🐶 pense à bonus-2. 🚀 Loading  */}
       </div>
     </>
